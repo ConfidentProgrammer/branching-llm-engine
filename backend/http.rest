@@ -1,0 +1,9 @@
+@baseUrl = http://localhost:8000
+
+### 1. Check Root Health Endpoint
+GET {{baseUrl}}/
+Accept: application/json
+
+### 2. Check Database Connectivity via Service Layer
+GET {{baseUrl}}/test-db
+Accept: application/json

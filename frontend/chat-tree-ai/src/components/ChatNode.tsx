@@ -23,7 +23,7 @@ export const ChatNode: React.FC<ChatNodeProps> = ({ data }) => {
   };
 
   return (
-    <div className="w-90 h-100 bg-[#121316] text-zinc-200 border border-zinc-800 rounded-lg shadow-2xl flex flex-col font-sans overflow-hidden transition-all">
+    <div className="w-90 bg-[#121316] text-zinc-200 border border-zinc-800 rounded-lg shadow-2xl flex flex-col font-sans overflow-hidden transition-all">
       {/* Top Handle for Parent Connection */}
       <Handle 
         type="target" 
