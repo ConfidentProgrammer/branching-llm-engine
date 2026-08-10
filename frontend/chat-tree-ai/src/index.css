@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Minimal Modern Dark Grid */
+.bg-canvas-dark {
+  background-color: #090a0f;
+  background-image: radial-gradient(#1f2430 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Custom thin scrollbars for node internal chats */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 2px;
+}
