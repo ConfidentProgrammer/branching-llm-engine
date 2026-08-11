@@ -2,11 +2,10 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from datetime import datetime
 import logging
-
 from database import get_db
 from schemas import DBStatusResponse
 from services.db_service import DatabaseService
-
+from routers import node_router, message_router
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("chattree")
@@ -16,6 +15,10 @@ app = FastAPI(
     version="1.0.0",
     description="Modular, enterprise-grade FastAPI backend for ChatTree"
 )
+
+app.include_router(node_router.router)
+app.include_router(message_router.router)
+
 
 @app.get("/", tags=["Health"])
 def read_root():

@@ -1,25 +1,16 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 import logging
-
+from services.ai_service import ai_client
 from models import Node, NodeEmbedding
 from schemas import NodeCreateRequest
 
 logger = logging.getLogger(__name__)
 
 class NodeService:
-    @staticmethod
-    def generate_embedding(text: str) -> list[float]:
-        """
-        Placeholder / Integration point for generating vector embeddings.
-        Must return a 1536-dimensional list of floats to match pgvector(1536).
-        """
-        # TODO: Replace with actual embedding call (e.g., OpenAI API, HuggingFace, etc.)
-        # Returning a dummy 1536-dim vector of zeros for architectural wiring verification
-        return [0.0] * 1536
-
+    
     @classmethod
-    def create_node_with_embedding(cls, db: Session, payload: NodeCreateRequest) -> Node:
+    def create_node(cls, db: Session, payload: NodeCreateRequest) -> Node:
         """
         Fails fast if parent doesn't exist, creates the node, 
         generates its embedding, and saves it to PostgreSQL atomically.
@@ -41,16 +32,6 @@ class NodeService:
                 parent_id=payload.parent_id
             )
             db.add(new_node)
-
-            # 3. Generate vector embedding from text content
-            vector_data = cls.generate_embedding(payload.content)
-
-            # 4. Create the Vector Embedding record linked to the node
-            new_embedding = NodeEmbedding(
-                node_id=new_node.id,
-                embedding=vector_data
-            )
-            db.add(new_embedding)
 
             # 5. Commit transaction atomically (All or nothing)
             db.commit()

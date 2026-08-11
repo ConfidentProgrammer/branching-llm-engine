@@ -7,3 +7,22 @@ Accept: application/json
 ### 2. Check Database Connectivity via Service Layer
 GET {{baseUrl}}/test-db
 Accept: application/json
+
+### Test Root Node Creation
+POST http://localhost:8000/nodes/
+Content-Type: application/json
+
+{
+  "id": "root-node-001",
+  "title": "My First Chat Branch",
+  "parent_id": null
+}
+
+### Test Message Creation with Vector Embedding
+POST http://localhost:8000/nodes/root-node-001/messages
+Content-Type: application/json
+
+{
+  "sender": "user",
+  "content": "Hello Gemini, how do I build a tree-based chat architecture?"
+}

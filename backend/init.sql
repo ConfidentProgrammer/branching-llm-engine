@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS nodes (
 
 -- 3. Messages Table (Individual chat items linked to a specific node)
 CREATE TABLE IF NOT EXISTS messages (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     node_id VARCHAR(50) REFERENCES nodes(id) ON DELETE CASCADE,
     sender VARCHAR(20) CHECK (sender IN ('user', 'assistant')) NOT NULL,
     content TEXT NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS messages (
 -- 4. Node Embeddings Table (For pgvector semantic RAG lookups)
 -- Industry standard dimension size for text-embedding-3-small is 1536
 CREATE TABLE IF NOT EXISTS node_embeddings (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(50) PRIMARY KEY,
     node_id VARCHAR(50) REFERENCES nodes(id) ON DELETE CASCADE,
     embedding VECTOR(1536), 
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
