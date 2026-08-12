@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:8000
+@nodeId = 59bcd2ca-b35d-45c3-8336-e97327a75df3
+
+### 1. Test Chat Orchestration Endpoint
+# This triggers the full loop: saves user message, runs global pgvector search, 
+# prompts Gemini, and saves the AI response atomically.
+POST {{baseUrl}}/api/chat/
+Content-Type: application/json
+
+{
+  "node_id": "{{nodeId}}",
+  "content": "Can you remind me how we configured our database and vector tables?"
+}
+
+###
+
+### 2. Test Subsequent Query (Testing Global Vector Context Flow)
+# Sending a follow-up query to see if the global top 10 search successfully 
+# pulls context from the previous message we just sent.
+POST {{baseUrl}}/api/chat/
+Content-Type: application/json
+
+{
+  "node_id": "{{nodeId}}",
+  "content": "What database extension did we use for storing vectors?"
+}

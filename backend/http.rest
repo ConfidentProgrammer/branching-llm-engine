@@ -13,13 +13,12 @@ POST http://localhost:8000/nodes/
 Content-Type: application/json
 
 {
-  "id": "root-node-001",
   "title": "My First Chat Branch",
   "parent_id": null
 }
 
 ### Test Message Creation with Vector Embedding
-POST http://localhost:8000/nodes/root-node-001/messages
+POST http://localhost:8000/nodes/59bcd2ca-b35d-45c3-8336-e97327a75df3/messages
 Content-Type: application/json
 
 {

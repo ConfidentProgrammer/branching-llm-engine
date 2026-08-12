@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 import logging
@@ -27,7 +29,7 @@ class NodeService:
 
             # 2. Create the Node record
             new_node = Node(
-                id=payload.id,
+                id=str(uuid.uuid4()),
                 title=payload.title,
                 parent_id=payload.parent_id
             )

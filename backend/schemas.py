@@ -11,7 +11,6 @@ class DBStatusResponse(BaseModel):
     timestamp: datetime
 
 class NodeCreateRequest(BaseModel):
-    id: str = Field(..., description="Unique identifier for the node (e.g., UUID or slug)")
     title: str = Field(..., max_length=255)
     parent_id: Optional[str] = Field(None, description="Parent node ID if this is a branch")
 

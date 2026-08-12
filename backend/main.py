@@ -5,7 +5,7 @@ import logging
 from database import get_db
 from schemas import DBStatusResponse
 from services.db_service import DatabaseService
-from routers import node_router, message_router
+from routers import node_router, message_router, chat_router
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("chattree")
@@ -18,7 +18,7 @@ app = FastAPI(
 
 app.include_router(node_router.router)
 app.include_router(message_router.router)
-
+app.include_router(chat_router.router)
 
 @app.get("/", tags=["Health"])
 def read_root():

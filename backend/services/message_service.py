@@ -73,14 +73,15 @@ class MessageService:
             )
 
     @classmethod
-    def get_top_k_similar_embeddings(cls, db: Session, query_vector: list[float], k: int = 5) -> list[NodeEmbedding]:
+    def get_global_top_k_messages(cls, db: Session, query_vector: list[float], k: int = 5) -> list[NodeEmbedding]:
         """
         Performs a vector similarity search using pgvector cosine distance.
         """
         try:
             # Query the NodeEmbedding table ordered by cosine distance
             statement = (
-                select(NodeEmbedding)
+                select(Message)
+                .join(NodeEmbedding, Message.node_id == NodeEmbedding.node_id)
                 .order_by(NodeEmbedding.embedding.cosine_distance(query_vector))
                 .limit(k)
             )
